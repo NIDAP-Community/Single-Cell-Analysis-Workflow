@@ -2,9 +2,9 @@ test_that("Test Dual labeling TEC Data", {
   CRObject <- getParamDL("TEC")
   output <- do.call(dualLabeling, CRObject)
   
-  expected.elements = c("object", "plot","plot2")
+  expected.elements = c("object", "plot","plot_densityHM","plot_table")
   expect_setequal(names(output), expected.elements)
-  expect_length(output$plot$grobs, 7)
+  expect_length(output$plot$grobs, 6)
   
   skip_on_ci()
   expect_snapshot_file(
@@ -12,7 +12,11 @@ test_that("Test Dual labeling TEC Data", {
         "TEC_duallabel.png"
     )
   expect_snapshot_file(
-    .drawdualtable(output$plot2),
+    .drawdualplot(output$plot_densityHM),
+    "TEC_duallabelDensity.png"
+  )
+  expect_snapshot_file(
+    .drawdualtable(output$plot_table),
     "TEC_dualtable.png"
   )
 })
@@ -29,9 +33,9 @@ test_that("Dual labeling with umap", {
   CRObject$data.reduction = "umap"
   output <- do.call(dualLabeling, CRObject)
 
-  expected.elements = c("object", "plot", "plot2")
+  expected.elements = c("object", "plot","plot_densityHM","plot_table")
   expect_setequal(names(output), expected.elements)
-  expect_length(output$plot$grobs, 7)
+  expect_length(output$plot$grobs, 6)
 
   skip_on_ci()
   expect_snapshot_file(
@@ -40,26 +44,14 @@ test_that("Dual labeling with umap", {
     )
 })
 
-test_that("Dual labeling without density heatmap", {
-  CRObject <- getParamDL("TEC")
-  CRObject$density.heatmap = FALSE
-  output <- do.call(dualLabeling, CRObject)
-  expect_length(output$plot$grobs, 6)
-
-  skip_on_ci()
-  expect_snapshot_file(
-    .drawdualplot(output$plot),
-             "nodensity_duallabel.png"
-    )
-})
 
 test_that("Test Dual labeling Chariou Data", {
   CRObject <- getParamDL("Chariou")
   output <- do.call(dualLabeling, CRObject)
 
-  expected.elements = c("object", "plot", "plot2")
+  expected.elements = c("object", "plot","plot_densityHM","plot_table")
   expect_setequal(names(output), expected.elements)
-  expect_length(output$plot$grobs, 7)
+  expect_length(output$plot$grobs, 6)
 
   skip_on_ci()
   expect_snapshot_file(
@@ -67,7 +59,11 @@ test_that("Test Dual labeling Chariou Data", {
        "chariou_duallabel.png"
     )
   expect_snapshot_file(
-    .drawdualtable(output$plot2),
+    .drawdualplot(output$plot_densityHM),
+    "chariou_duallabelDensity.png"
+  )
+  expect_snapshot_file(
+    .drawdualtable(output$plot_table),
     "chariou_dualtable.png"
   )
 })
@@ -76,9 +72,9 @@ test_that("Test Dual labeling PBMC-single Data", {
   CRObject <- getParamDL("pbmc-single")
   output <- do.call(dualLabeling, CRObject)
 
-  expected.elements = c("object", "plot", "plot2")
+  expected.elements = c("object", "plot","plot_densityHM","plot_table")
   expect_setequal(names(output), expected.elements)
-  expect_length(output$plot$grobs, 7)
+  expect_length(output$plot$grobs, 6)
 
   skip_on_ci()
   expect_snapshot_file(
@@ -86,7 +82,11 @@ test_that("Test Dual labeling PBMC-single Data", {
              "pbmc-single_duallabel.png"
     )
   expect_snapshot_file(
-    .drawdualtable(output$plot2),
+    .drawdualplot(output$plot_densityHM),
+    "pbmc-single_duallabelDensity.png"
+  )
+  expect_snapshot_file(
+    .drawdualtable(output$plot_table),
     "pbmc_dualtable.png"
   )
 })
@@ -95,9 +95,9 @@ test_that("Test Dual labeling NSCLC-multi Data", {
   CRObject <- getParamDL("nsclc-multi")
   output <- do.call(dualLabeling, CRObject)
 
-  expected.elements = c("object", "plot", "plot2")
+  expected.elements = c("object", "plot","plot_densityHM","plot_table")
   expect_setequal(names(output), expected.elements)
-  expect_length(output$plot$grobs, 7)
+  expect_length(output$plot$grobs, 6)
 
   skip_on_ci()
   expect_snapshot_file(
@@ -105,8 +105,12 @@ test_that("Test Dual labeling NSCLC-multi Data", {
              "nsclc-multi_duallabel.png"
     )
   expect_snapshot_file(
-    .drawdualtable(output$plot2),
-    "nsclc_dualtable.png"
+    .drawdualplot(output$plot_densityHM),
+    "nsclc-multi_duallabelDensity.png"
+  )
+  expect_snapshot_file(
+    .drawdualtable(output$plot_table),
+    "nsclc-multi_dualtable.png"
   )
 })
 
@@ -114,9 +118,9 @@ test_that("Test Dual labeling BRCA Data", {
   CRObject <- getParamDL("BRCA")
   output <- do.call(dualLabeling, CRObject)
 
-  expected.elements = c("object", "plot", "plot2")
+  expected.elements = c("object", "plot","plot_densityHM","plot_table")
   expect_setequal(names(output), expected.elements)
-  expect_length(output$plot$grobs, 7)
+  expect_length(output$plot$grobs, 6)
 
   skip_on_ci()
   expect_snapshot_file(
@@ -124,7 +128,11 @@ test_that("Test Dual labeling BRCA Data", {
              "brca_duallabel.png"
     )
   expect_snapshot_file(
-    .drawdualtable(output$plot2),
+    .drawdualplot(output$plot_densityHM),
+    "brca_duallabelDensity.png"
+  )
+  expect_snapshot_file(
+    .drawdualtable(output$plot_table),
     "brca_dualtable.png"
   )
 })

@@ -24,11 +24,14 @@ combineNormalize(
   clust.res.low = 0.2,
   clust.res.high = 1.2,
   clust.res.bin = 0.2,
-  methods.pca = c("Elbow", "Marchenko-Pastur"),
+  methods.pca = "none",
   var.threshold = 0.1,
+  pca.reg.plot = FALSE,
   jackstraw = FALSE,
   jackstraw.dims = 5,
-  exclude.sample = "",
+  exclude.sample = NULL,
+  cell.count.limit = 35000,
+  reduce.so = FALSE,
   project.name = "scRNAProject",
   cell.hashing.data = FALSE
 )
@@ -71,7 +74,9 @@ Options: vst, mean.var.plot, dispersion. (Default: 'vst')}
 
 \item{only.var.genes}{If dataset is larger than ~40k filtered cells,
 set to TRUE. If TRUE, only variable genes will be available for
-downstream analysis. (Default: FALSE)}
+downstream analysis. If dataset is larger than the number of cells set in
+"Conserve Memory Max Cell Limit" "Only Variable Genes" is automatically
+set to TRUE. (Default: FALSE)}
 
 \item{draw.umap}{If TRUE, draw UMAP plot. (Default: TRUE)}
 
@@ -99,10 +104,16 @@ at resolutions of 0.2, 0.4 and 0.6. (Default: 0.2)}
 \item{methods.pca}{Methods available: Marchenko-Pastur: use eigenvalue
 null upper bound from URD, Elbow: Find threshold where percent change
 in variation between consecutive PCs is less than X\% (set in var.threshold).
-(Default: c('Elbow','Marchenko-Pastur'))}
+If none is selected (regardless of other selections) the plot will not be
+generated. (Default: 'none')}
 
 \item{var.threshold}{For Elbow method, set percent change threshold
 in variation between consecutive PCs. (Default: 0.1)}
+
+\item{pca.reg.plot}{Opt to visualize the effect of your regression variables
+on in a PCA plot. This plot will create PCA plots with and without
+regression variables applied and can be used to help determine if
+regression is necessary to properly normalize your data. (Default: FALSE)}
 
 \item{jackstraw}{Opt to visualize your data in a Jackstraw plot. Jackstraw
 plot can add more description than an elbow plot but is compute intensive
@@ -112,7 +123,16 @@ process and may not be suitable for larger datasets. (Default: FALSE)}
 
 \item{exclude.sample}{Exclude unwanted samples from the merge step.
 Include sample names to be removed. If you want to exclude several samples,
-separate each sample number by comma (e.g. sample1,sample2,sample3,sample4).}
+separate each sample number by comma (e.g. sample1,sample2,sample3,sample4).
+(Default: NULL)}
+
+\item{cell.count.limit}{If total number of cell exceeds this limit conserve
+memory option of SCTransform will be used and return only Variable Genes.
+(Default: 35000)}
+
+\item{reduce.so}{Remove any additional assays from input Seurat Objects
+except for the original RNA Assay. This option should be used if input
+Seurat Object was created outside of the NIDAP pipeline. (Default: FALSE)}
 
 \item{project.name}{Add project name to the Seurat object metadata.
 (Default: 'scRNAProject')}

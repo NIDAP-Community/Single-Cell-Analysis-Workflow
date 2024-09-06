@@ -140,3 +140,15 @@ getParamRaw <- function(data){
               
               ))  
 }
+
+.drawFig <- function(x, width = 10, height = 10){
+  path <- tempfile(fileext = ".png")
+  ggsave(path, x, width = 10, height = 10)
+  print(path)
+}
+.saveSO <- function(x, width = 10, height = 10){
+  path <- tempfile(fileext = ".rds")
+  saveRDS(x, file = path)
+  print(path)
+}
+

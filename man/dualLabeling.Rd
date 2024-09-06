@@ -12,24 +12,23 @@ dualLabeling(
   marker.2,
   marker.1.type = "SCT",
   marker.2.type = "SCT",
-  data.reduction = "umap",
+  data.reduction = "both",
   point.size = 0.5,
   point.shape = 16,
   point.transparency = 0.5,
-  add.marker.thresholds = FALSE,
+  add.marker.thresholds = TRUE,
   marker.1.threshold = 0.5,
   marker.2.threshold = 0.5,
-  filter.data = FALSE,
-  M1.filter.direction = "greater than",
-  M2.filter.direction = "greater than",
+  filter.data = TRUE,
+  marker.1.filter.direction = "greater than",
+  marker.2.filter.direction = "greater than",
   apply.filter.1 = TRUE,
   apply.filter.2 = TRUE,
   filter.condition = TRUE,
-  parameter.name = "Marker",
-  trim.marker.1 = TRUE,
-  trim.marker.2 = TRUE,
+  parameter.name = "My_CoExp",
+  trim.marker.1 = FALSE,
+  trim.marker.2 = FALSE,
   pre.scale.trim = 0.99,
-  density.heatmap = FALSE,
   display.unscaled.values = FALSE
 )
 }
@@ -49,7 +48,7 @@ dualLabeling(
 "protein","HTO" (default is "SCT")}
 
 \item{data.reduction}{Dimension Reduction method to use for image. Options
-are "umap" or "tsne" (default is "umap")}
+are umap, tsne, or both (default is "umap")}
 
 \item{point.size}{Point size for image (default is 0.5)}
 
@@ -66,11 +65,11 @@ are "umap" or "tsne" (default is "umap")}
 \item{filter.data}{Add new parameter column to metadata annotating where
 marker thresholds are applied (default is TRUE)}
 
-\item{M1.filter.direction}{Annotate cells that have gene expression levels
+\item{marker.1.filter.direction}{Annotate cells that have gene expression levels
 for marker 1 using the marker 1 threshold. Choices are "greater than"
 or "less than" (default is "greater than")}
 
-\item{M2.filter.direction}{Annotate cells that have gene expression levels
+\item{marker.2.filter.direction}{Annotate cells that have gene expression levels
 for marker 2 using the marker 2 threshold. Choices are "greater than"
 or "less than" (default is "greater than")}
 
@@ -82,20 +81,17 @@ or "less than" (default is "greater than")}
 intersection. If FALSE, apply both filters and take the union.}
 
 \item{parameter.name}{Name for metadata column for new marker filters
-(Default is "Marker")}
+(Default is "My_CoExp")}
 
 \item{trim.marker.1}{Trim top and bottom percentile of marker 1 signal to
 pre-scale trim values (below) to remove extremely low and high values
-(Default is TRUE)}
+(Default is FALSE)}
 
 \item{trim.marker.2}{Trim top and bottom percentile of marker 2 signal to
 pre-scale trim values (below) to remove extremely low and high values
-(Default is TRUE)}
+(Default is FALSE)}
 
 \item{pre.scale.trim}{Set trimming percentile values (Defalut is 0.99)}
-
-\item{density.heatmap}{Creates a additional heatmap showing the density
-distribution of cells. (Default is FALSE)}
 
 \item{display.unscaled.values}{Set to TRUE if you want to view the unscaled
 gene/protein expression values (Default is FALSE)}

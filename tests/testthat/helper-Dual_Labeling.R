@@ -17,7 +17,6 @@ getParamDL <- function(data){
       data.reduction = "tsne"
       filter.data = TRUE
       filter.condition = TRUE
-      density.heatmap = TRUE
       display.unscaled.values = TRUE
   } else if (data == "Chariou") {
       object <- selectCRObject("Chariou")
@@ -34,7 +33,6 @@ getParamDL <- function(data){
       apply.filter.2 = TRUE
       filter.data = FALSE
       filter.condition = TRUE
-      density.heatmap = TRUE
       display.unscaled.values = TRUE
   } else if (data == "pbmc-single") {
       object <- selectCRObject("pbmc-single")
@@ -51,7 +49,6 @@ getParamDL <- function(data){
       filter.condition = TRUE
       filter.data = TRUE
       data.reduction = "tsne"
-      density.heatmap = TRUE
       display.unscaled.values = TRUE
   } else if (data == "nsclc-multi") {
       object <- selectCRObject("nsclc-multi")
@@ -68,7 +65,6 @@ getParamDL <- function(data){
       apply.filter.2 = TRUE
       filter.condition = FALSE
       data.reduction = "tsne"
-      density.heatmap = TRUE
       display.unscaled.values = TRUE
   } else if (data == "BRCA") {
       object <- selectCRObject("BRCA")
@@ -85,7 +81,6 @@ getParamDL <- function(data){
       apply.filter.2 = FALSE
       filter.condition = TRUE
       data.reduction = "tsne"
-      density.heatmap = TRUE
       display.unscaled.values = TRUE
   }
   
@@ -96,7 +91,6 @@ getParamDL <- function(data){
               "marker.2" = marker.2,
               "marker.2.type" = marker.2.type,
               "data.reduction" = data.reduction,
-              "density.heatmap" = density.heatmap,
               "display.unscaled.values" = display.unscaled.values,
               "filter.data" = filter.data,
               "filter.condition" = filter.condition,

@@ -6,7 +6,7 @@ getParamCN <- function(data){
     object=object
     
     npcs = 30
-    vars.to.regress = c()
+    vars.to.regress = NULL
     clust.res.low=0.2
     clust.res.high = 1.2
     only.var.genes = FALSE 
@@ -24,12 +24,12 @@ getParamCN <- function(data){
     only.var.genes = FALSE 
     
     
-  } else if (data == "PBMC_Single") {
+  } else if (data == "NSCLC_Single") {
     object <- readRDS(test_path(
-      paste0("fixtures/",data), paste0(data,'_Filtered_SO_downsample.rds')))
+      paste0("fixtures/",data), paste0('NSCLCsingle','_Filtered_SO_downsample.rds')))
     
     npcs = 30
-    vars.to.regress = c()
+    vars.to.regress = NULL
     clust.res.low=0.2
     clust.res.high = 1.2
     only.var.genes = FALSE 
@@ -37,11 +37,11 @@ getParamCN <- function(data){
     
   } else if (data == "NSCLC_Multi") {
     object <- readRDS(test_path(
-      paste0("fixtures/",data), paste0(data,'_Filtered_SO_downsample.rds')))
+      paste0("fixtures/",data), paste0('NSCLCmulti','_Filtered_SO_downsample.rds')))
     object=object
     
     npcs = 30
-    vars.to.regress = c()
+    vars.to.regress = NULL
     clust.res.low=0.2
     clust.res.high = 1.2
     only.var.genes = FALSE 
@@ -49,11 +49,11 @@ getParamCN <- function(data){
     
   } else if (data == "BRCA") {
     object <- readRDS(test_path(
-      paste0("fixtures/",data), paste0(data,'_Filtered_SO_downsample.rds')))
+      paste0("fixtures/",data), paste0('NSCLCmulti','_Filtered_SO_downsample.rds')))
     object=object
     
     npcs = 30
-    vars.to.regress = c()
+    vars.to.regress = NULL
     clust.res.low=0.2
     clust.res.high = 1.2
     only.var.genes = TRUE 
@@ -67,3 +67,17 @@ getParamCN <- function(data){
               "clust.res.high" = clust.res.high,
               "only.var.genes" = only.var.genes ))  
 }
+
+
+
+.drawFig <- function(x, width = 10, height = 10){
+  path <- tempfile(fileext = ".png")
+  ggsave(path, x, width = 10, height = 10)
+  print(path)
+}
+.saveSO <- function(x, width = 10, height = 10){
+  path <- tempfile(fileext = ".rds")
+  saveRDS(x, file = path)
+  print(path)
+}
+
